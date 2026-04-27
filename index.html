@@ -10,10 +10,10 @@
     <div class="container">
         <h1>生字資料庫</h1>
         
-        <div class="input-section" style="flex-direction: column;">
+        <div class="input-section">
             <input type="text" id="wordInput" placeholder="輸入英文生字..." autocomplete="off">
             <input type="text" id="transInput" placeholder="輸入中文翻譯..." autocomplete="off">
-            <button onclick="addWord()" style="width: 100%; margin-top: 5px;">新增紀錄</button>
+            <button onclick="addWord()">新增紀錄</button>
         </div>
 
         <div class="action-bar">
@@ -24,7 +24,7 @@
         <div id="quizArea" class="quiz-container" style="display:none;">
             <h3>單字挑戰</h3>
             <div id="quizContent"></div>
-            <button onclick="document.getElementById('quizArea').style.display='none'" style="margin-top:10px; background:#86868b;">關閉測驗</button>
+            <button onclick="document.getElementById('quizArea').style.display='none'" class="close-btn">關閉測驗</button>
         </div>
 
         <table id="wordTable">
@@ -41,4 +41,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
