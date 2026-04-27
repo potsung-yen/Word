@@ -13,26 +13,28 @@
         <div class="input-section">
             <input type="text" id="wordInput" placeholder="輸入英文生字..." autocomplete="off">
             <input type="text" id="transInput" placeholder="輸入中文翻譯..." autocomplete="off">
-            <button onclick="addWord()">新增紀錄</button>
+            <button onclick="addWord()" class="main-add-btn">新增紀錄</button>
         </div>
 
         <div class="action-bar">
-            <button onclick="exportCSV()" class="secondary">匯出備份</button>
-            <button onclick="generateQuiz()" class="quiz-btn">生成測驗卡</button>
+            <button onclick="exportCSV()" class="secondary-btn">匯出備份</button>
+            <button onclick="generateQuiz()" class="quiz-start-btn">生成測驗卡</button>
         </div>
 
         <div id="quizArea" class="quiz-container" style="display:none;">
-            <h3>單字挑戰</h3>
+            <div class="quiz-header">
+                <h3>單字挑戰</h3>
+                <button onclick="document.getElementById('quizArea').style.display='none'" class="close-text-btn">關閉</button>
+            </div>
             <div id="quizContent"></div>
-            <button onclick="document.getElementById('quizArea').style.display='none'" class="close-btn">關閉測驗</button>
         </div>
 
         <table id="wordTable">
             <thead>
                 <tr>
-                    <th>生字 (點擊全選)</th>
-                    <th>翻譯</th>
-                    <th>次數</th>
+                    <th width="45%">生字</th>
+                    <th width="35%">翻譯</th>
+                    <th width="20%">紀錄</th>
                 </tr>
             </thead>
             <tbody id="wordList"></tbody>
