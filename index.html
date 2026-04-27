@@ -10,9 +10,10 @@
     <div class="container">
         <h1>生字資料庫</h1>
         
-        <div class="input-section">
+        <div class="input-section" style="flex-direction: column;">
             <input type="text" id="wordInput" placeholder="輸入英文生字..." autocomplete="off">
-            <button onclick="addWord()">新增</button>
+            <input type="text" id="transInput" placeholder="輸入中文翻譯..." autocomplete="off">
+            <button onclick="addWord()" style="width: 100%; margin-top: 5px;">新增紀錄</button>
         </div>
 
         <div class="action-bar">
@@ -30,8 +31,8 @@
             <thead>
                 <tr>
                     <th>生字 (點擊全選)</th>
+                    <th>翻譯</th>
                     <th>次數</th>
-                    <th>日期</th>
                 </tr>
             </thead>
             <tbody id="wordList"></tbody>
@@ -40,3 +41,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
