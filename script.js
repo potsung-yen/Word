@@ -5,7 +5,7 @@ function renderTable() {
     if (!list) return;
     list.innerHTML = '';
     
-    // 按日期排序（最新的在前面）
+    // 按時間排序（最新的在上面）
     const sortedEntries = Object.entries(vocabData).sort((a, b) => {
         return new Date(b[1].date) - new Date(a[1].date);
     });
@@ -13,8 +13,8 @@ function renderTable() {
     for (let [word, data] of sortedEntries) {
         const row = `<tr>
             <td class="selectable" onclick="selectText(this)">${word}</td>
+            <td>${data.translation || ''}</td>
             <td>${data.count}</td>
-            <td style="font-size:12px; color:#86868b;">${data.date}</td>
         </tr>`;
         list.innerHTML += row;
     }
@@ -30,32 +30,51 @@ function selectText(element) {
 
 function addWord() {
     const wInput = document.getElementById('wordInput');
+    const tInput = document.getElementById('transInput');
     const word = wInput.value.trim();
+    const translation = tInput.value.trim();
 
     if (!word) return;
 
     if (vocabData[word]) {
         vocabData[word].count += 1;
-        vocabData[word].date = new Date().toLocaleDateString();
+        // 如果這次有輸入新的翻譯，就更新它
+        if (translation) vocabData[word].translation = translation;
+        vocabData[word].date = new Date().toISOString();
     } else {
         vocabData[word] = { 
+            translation: translation,
             count: 1, 
-            date: new Date().toLocaleDateString() 
+            date: new Date().toISOString()
         };
     }
     
     localStorage.setItem('myVocab', JSON.stringify(vocabData));
     renderTable();
 
-    // 重點：自動選取輸入框文字，方便呼叫 iOS 系統選單（查詢/翻譯）
+    // 清空輸入框並回到生字欄位
+    wInput.value = '';
+    tInput.value = '';
     wInput.focus();
-    wInput.setSelectionRange(0, wInput.value.length);
 }
 
+// 流程優化：Enter 鍵邏輯
+document.getElementById('wordInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        document.getElementById('transInput').focus(); // 生字輸入完跳到翻譯
+    }
+});
+
+document.getElementById('transInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        addWord(); // 翻譯輸入完直接存檔
+    }
+});
+
 function exportCSV() {
-    let csvContent = "data:text/csv;charset=utf-8,Word,Count,LastUpdate\n";
+    let csvContent = "data:text/csv;charset=utf-8,Word,Translation,Count,Date\n";
     for (let word in vocabData) {
-        csvContent += `${word},${vocabData[word].count},${vocabData[word].date}\n`;
+        csvContent += `${word},${vocabData[word].translation},${vocabData[word].count},${vocabData[word].date}\n`;
     }
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
@@ -71,22 +90,24 @@ function generateQuiz() {
     const content = document.getElementById('quizContent');
     const words = Object.keys(vocabData);
     
-    if (words.length === 0) {
-        alert("請先新增一些生字！");
-        return;
-    }
+    if (words.length === 0) return;
 
     quizArea.style.display = 'block';
     const randomWord = words[Math.floor(Math.random() * words.length)];
+    const data = vocabData[randomWord];
 
     content.innerHTML = `
-        <div class="flashcard">${randomWord}</div>
-        <p style="font-size:14px; color:#1d1d1f;">請回憶意思，或點擊單字呼叫手機翻譯</p>
+        <div class="flashcard" onclick="this.classList.toggle('show-trans')">
+            <div class="card-word">${randomWord}</div>
+            <div class="card-trans" id="cardTrans" style="visibility:hidden;">${data.translation || '無翻譯'}</div>
+        </div>
+        <p style="font-size:13px; color:#86868b;">點擊卡片顯示翻譯，按按鈕換題</p>
     `;
+    
+    // 簡單的點擊顯示邏輯
+    document.querySelector('.flashcard').onclick = function() {
+        document.getElementById('cardTrans').style.visibility = 'visible';
+    };
 }
-
-document.getElementById('wordInput').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') addWord();
-});
 
 renderTable();
