@@ -1,42 +1,89 @@
-.quiz-question {
-    text-align: center;
-    margin-bottom: 20px;
+body {
+    font-family: -apple-system, system-ui, sans-serif;
+    background-color: #f2f2f7;
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
 }
 
-.options-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+.container {
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
+
+h1 { text-align: center; color: #1c1c1e; font-size: 28px; margin-bottom: 20px; }
+
+/* 輸入區優化 */
+.input-section { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+
+input[type="text"] {
+    height: 55px; /* 加高 */
+    padding: 0 15px;
+    border: 2px solid #e5e5ea;
+    border-radius: 14px;
+    font-size: 18px; /* 加大字體 */
+    outline: none;
+    background: #f9f9f9;
+}
+
+input[type="text"]:focus { border-color: #007aff; background: #fff; }
+
+.main-add-btn {
+    height: 60px;
+    background: #007aff;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,122,255,0.3);
+}
+
+/* 按鈕列 */
+.action-bar { display: flex; gap: 10px; margin-bottom: 30px; }
+.secondary-btn { flex: 1; height: 50px; background: #8e8e93; color: white; border: none; border-radius: 12px; font-size: 16px; }
+.quiz-start-btn { flex: 2; height: 50px; background: #34c759; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; }
+
+/* 測驗區域優化 */
+.quiz-container {
+    background: #ffffff;
+    border: 2px solid #34c759;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.close-text-btn { background: none; color: #ff3b30; border: none; font-size: 16px; font-weight: 600; }
+
+.quiz-question h2 { font-size: 36px; color: #007aff; margin: 10px 0; }
+
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; } /* 改為單欄大按鈕 */
 
 .option-btn {
-    background: white;
-    color: #1d1d1f;
-    border: 2px solid #d2d2d7;
-    padding: 15px 10px;
-    font-size: 16px;
-    border-radius: 12px;
-    transition: all 0.2s;
-}
-
-.option-btn:active {
+    height: 65px; /* 選項加高，超好按 */
     background: #f2f2f7;
-    transform: scale(0.98);
+    border: none;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.2s;
 }
 
-.option-btn:hover {
-    border-color: #0071e3;
-}
+.option-btn:active { background: #d1d1d6; transform: scale(0.97); }
 
-.audio-btn {
-    background: #ff9500;
-    font-size: 14px;
-    padding: 8px 15px;
-    margin-top: 5px;
-}
+.audio-btn { background: #ff9500; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-size: 16px; margin-bottom: 10px; }
 
-.close-btn {
-    background: #86868b;
-    width: 100%;
-    margin-top: 20px;
-}
+/* 表格優化 */
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 10px; font-size: 13px; color: #8e8e93; border-bottom: 1px solid #e5e5ea; }
+td { padding: 15px 10px; border-bottom: 1px solid #f2f2f2; font-size: 16px; }
+
+.selectable { color: #007aff; font-weight: 600; text-decoration: underline; }
+small { color: #ff3b30; font-size: 11px; display: block; margin-top: 4px; }
