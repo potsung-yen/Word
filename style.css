@@ -17,97 +17,65 @@ body {
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
 
-h1 {
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
+h1 { text-align: center; font-weight: 700; margin-bottom: 20px; }
 
 .input-section {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 20px;
 }
 
 input[type="text"] {
-    flex: 1;
     padding: 14px;
     border: 1px solid #d2d2d7;
     border-radius: 12px;
-    font-size: 17px;
+    font-size: 16px;
     -webkit-appearance: none;
+    outline: none;
 }
+
+input[type="text"]:focus { border-color: #0071e3; }
 
 button {
     background-color: #0071e3;
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 14px;
     border-radius: 12px;
     font-weight: 600;
-    font-size: 16px;
     cursor: pointer;
 }
 
-.action-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
-}
-
+.action-bar { display: flex; gap: 10px; margin-bottom: 25px; }
 .secondary { background-color: #86868b; }
 .quiz-btn { background-color: #34c759; flex: 1; }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    text-align: left;
-    padding: 15px 10px;
-    border-bottom: 1px solid #f2f2f2;
-}
-
-th {
-    color: #86868b;
-    font-size: 13px;
-    text-transform: uppercase;
-}
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 15px 8px; border-bottom: 1px solid #f2f2f2; }
+th { color: #86868b; font-size: 12px; }
 
 .selectable {
     user-select: all;
     -webkit-user-select: all;
     color: #0071e3;
     font-weight: 600;
-    cursor: pointer;
-}
-
-.quiz-container {
-    margin-bottom: 25px;
-    padding: 20px;
-    background-color: #f2f2f7;
-    border-radius: 16px;
-    text-align: center;
 }
 
 .flashcard {
-    width: 220px;
-    height: 140px;
+    width: 240px;
+    height: 150px;
     margin: 15px auto;
     background: white;
     border: 2px solid #0071e3;
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    font-weight: 700;
-    color: #0071e3;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-@media (max-width: 480px) {
-    .container { padding: 15px; }
-    input[type="text"] { font-size: 16px; }
-}
+.card-word { font-size: 26px; font-weight: 700; color: #0071e3; }
+.card-trans { font-size: 18px; color: #86868b; margin-top: 10px; }
+
+.quiz-container { background-color: #f2f2f7; border-radius: 16px; padding: 20px; text-align: center; }
