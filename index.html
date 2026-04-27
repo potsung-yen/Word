@@ -1,45 +1,89 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>個人生字資料庫</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>生字資料庫</h1>
-        
-        <div class="input-section">
-            <input type="text" id="wordInput" placeholder="輸入英文生字..." autocomplete="off">
-            <input type="text" id="transInput" placeholder="輸入中文翻譯..." autocomplete="off">
-            <button onclick="addWord()" class="main-add-btn">新增紀錄</button>
-        </div>
+body {
+    font-family: -apple-system, system-ui, sans-serif;
+    background-color: #f2f2f7;
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
 
-        <div class="action-bar">
-            <button onclick="exportCSV()" class="secondary-btn">匯出備份</button>
-            <button onclick="generateQuiz()" class="quiz-start-btn">生成測驗卡</button>
-        </div>
+.container {
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
 
-        <div id="quizArea" class="quiz-container" style="display:none;">
-            <div class="quiz-header">
-                <h3>單字挑戰</h3>
-                <button onclick="document.getElementById('quizArea').style.display='none'" class="close-text-btn">關閉</button>
-            </div>
-            <div id="quizContent"></div>
-        </div>
+h1 { text-align: center; color: #1c1c1e; font-size: 28px; margin-bottom: 20px; }
 
-        <table id="wordTable">
-            <thead>
-                <tr>
-                    <th width="45%">生字</th>
-                    <th width="35%">翻譯</th>
-                    <th width="20%">紀錄</th>
-                </tr>
-            </thead>
-            <tbody id="wordList"></tbody>
-        </table>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+/* 輸入區優化 */
+.input-section { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+
+input[type="text"] {
+    height: 55px; /* 加高 */
+    padding: 0 15px;
+    border: 2px solid #e5e5ea;
+    border-radius: 14px;
+    font-size: 18px; /* 加大字體 */
+    outline: none;
+    background: #f9f9f9;
+}
+
+input[type="text"]:focus { border-color: #007aff; background: #fff; }
+
+.main-add-btn {
+    height: 60px;
+    background: #007aff;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,122,255,0.3);
+}
+
+/* 按鈕列 */
+.action-bar { display: flex; gap: 10px; margin-bottom: 30px; }
+.secondary-btn { flex: 1; height: 50px; background: #8e8e93; color: white; border: none; border-radius: 12px; font-size: 16px; }
+.quiz-start-btn { flex: 2; height: 50px; background: #34c759; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; }
+
+/* 測驗區域優化 */
+.quiz-container {
+    background: #ffffff;
+    border: 2px solid #34c759;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.close-text-btn { background: none; color: #ff3b30; border: none; font-size: 16px; font-weight: 600; }
+
+.quiz-question h2 { font-size: 36px; color: #007aff; margin: 10px 0; }
+
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; } /* 改為單欄大按鈕 */
+
+.option-btn {
+    height: 65px; /* 選項加高，超好按 */
+    background: #f2f2f7;
+    border: none;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.option-btn:active { background: #d1d1d6; transform: scale(0.97); }
+
+.audio-btn { background: #ff9500; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-size: 16px; margin-bottom: 10px; }
+
+/* 表格優化 */
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 10px; font-size: 13px; color: #8e8e93; border-bottom: 1px solid #e5e5ea; }
+td { padding: 15px 10px; border-bottom: 1px solid #f2f2f2; font-size: 16px; }
+
+.selectable { color: #007aff; font-weight: 600; text-decoration: underline; }
+small { color: #ff3b30; font-size: 11px; display: block; margin-top: 4px; }
