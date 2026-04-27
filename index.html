@@ -2,39 +2,40 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>個人生字練習庫</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>個人生字資料庫</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>我的生字資料庫</h1>
+        <h1>生字資料庫</h1>
         
         <div class="input-section">
-            <input type="text" id="wordInput" placeholder="輸入生字...">
-            <button onclick="addWord()">新增 / 紀錄</button>
+            <input type="text" id="wordInput" placeholder="輸入英文生字..." autocomplete="off">
+            <button onclick="addWord()">新增</button>
         </div>
 
         <div class="action-bar">
-            <button onclick="exportCSV()" class="secondary">匯出 CSV 備份</button>
-            <button onclick="generateQuiz()" class="quiz-btn">生成練習題</button>
+            <button onclick="exportCSV()" class="secondary">匯出備份</button>
+            <button onclick="generateQuiz()" class="quiz-btn">生成測驗卡</button>
+        </div>
+
+        <div id="quizArea" class="quiz-container" style="display:none;">
+            <h3>單字挑戰</h3>
+            <div id="quizContent"></div>
+            <button onclick="document.getElementById('quizArea').style.display='none'" style="margin-top:10px; background:#86868b;">關閉測驗</button>
         </div>
 
         <table id="wordTable">
             <thead>
                 <tr>
-                    <th>生字</th>
-                    <th>出現次數</th>
-                    <th>最後更新</th>
+                    <th>生字 (點擊全選)</th>
+                    <th>次數</th>
+                    <th>日期</th>
                 </tr>
             </thead>
             <tbody id="wordList"></tbody>
         </table>
-
-        <div id="quizArea" class="quiz-container" style="display:none;">
-            <h3>今日練習題</h3>
-            <div id="quizContent"></div>
-        </div>
     </div>
     <script src="script.js"></script>
 </body>
