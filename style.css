@@ -1,28 +1,42 @@
-body { font-family: -apple-system, sans-serif; background: #f5f5f7; padding: 20px; display: flex; justify-content: center; }
-.container { max-width: 600px; width: 100%; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-.input-section { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-input { padding: 14px; border: 1px solid #d2d2d7; border-radius: 12px; font-size: 16px; outline: none; }
-button { background: #0071e3; color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; }
-.action-bar { display: flex; gap: 10px; margin-bottom: 25px; }
-.secondary { background: #86868b; }
-.quiz-btn { background: #34c759; flex: 1; }
-table { width: 100%; border-collapse: collapse; }
-th, td { text-align: left; padding: 15px 8px; border-bottom: 1px solid #f2f2f2; }
-.selectable { user-select: all; -webkit-user-select: all; color: #0071e3; font-weight: 600; cursor: pointer; }
+.quiz-question {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-/* 單字卡翻轉效果 */
-.quiz-container { background: #f2f2f7; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; }
-.flashcard-wrapper { perspective: 1000px; width: 240px; height: 160px; margin: 20px auto; }
-.flashcard { 
-    position: relative; width: 100%; height: 100%; text-align: center; 
-    transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer;
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
-.flashcard.is-flipped { transform: rotateY(180deg); }
-.card-front, .card-back {
-    position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
-    display: flex; align-items: center; justify-content: center; border-radius: 15px; 
-    font-size: 24px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+.option-btn {
+    background: white;
+    color: #1d1d1f;
+    border: 2px solid #d2d2d7;
+    padding: 15px 10px;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: all 0.2s;
 }
-.card-front { background: white; color: #0071e3; border: 2px solid #0071e3; }
-.card-back { background: #0071e3; color: white; transform: rotateY(180deg); }
-.close-btn { background: #86868b; margin-top: 10px; }
+
+.option-btn:active {
+    background: #f2f2f7;
+    transform: scale(0.98);
+}
+
+.option-btn:hover {
+    border-color: #0071e3;
+}
+
+.audio-btn {
+    background: #ff9500;
+    font-size: 14px;
+    padding: 8px 15px;
+    margin-top: 5px;
+}
+
+.close-btn {
+    background: #86868b;
+    width: 100%;
+    margin-top: 20px;
+}
